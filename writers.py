@@ -13,8 +13,12 @@ cwd = os.getcwd()
 def write_legislator_support_ooppose_count(
     sorted_legislators: Sequence, sorted_votes_by_legislator_id: Sequence
 ):
+    """Create a csv file containing, for each legislator, their name and the number of bills supported and opposed by them"""
     with open(
-        cwd + "\\legislator_support_oppose_count.csv", "w", newline="", encoding="utf-8"
+        f"{cwd}\\outputs\\legislator_support_oppose_count.csv",
+        "w",
+        newline="",
+        encoding="utf-8",
     ) as file:
         writer = csv.writer(file)
         fields = ["id", "name", "num_supported_bills", "num_opposed_bills"]
@@ -51,14 +55,17 @@ def write_bill_support(
     bills: Sequence,
     map_bill_to_vote: Sequence,
 ):
-    with open(cwd + "\\bill_support.csv", "w", newline="", encoding="utf-8") as file:
+    """Create a csv file containing, for each legislator, their name and the number of bills supported and opposed by them"""
+
+    with open(
+        f"{cwd}\\outputs\\bill_support.csv", "w", newline="", encoding="utf-8"
+    ) as file:
         writer = csv.writer(file)
         fields = ["id", "title", "supporter_count", "opposer_count", "primary_sponsor"]
 
         writer.writerow(fields)
-        i = 0
         vote_count = {}
-        for index, vote_result in enumerate(sorted_votes_by_legislator_id):
+        for _, vote_result in enumerate(sorted_votes_by_legislator_id):
             key = vote_result[2]
             if key not in vote_count:
                 vote_count[key] = [0, 0]
@@ -68,7 +75,7 @@ def write_bill_support(
             else:
                 vote_count[key][1] += 1
 
-        for index, bill in enumerate(bills):
+        for _, bill in enumerate(bills):
             sponsor_index = search_legislator_by_id(sorted_legislators, bill[2])
             sponsor = ""
             if sponsor_index != -1:

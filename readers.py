@@ -11,9 +11,12 @@ cwd = os.getcwd()
 
 
 def read_legislators() -> Sequence:
+    """Reads a csv file containing information on legislators and returns a list sorted by their id"""
     sorted_legislators: Sequence = []
 
-    with open(f"{cwd}\\legislators.csv", newline="", encoding="utf-8") as legislators:
+    with open(
+        f"{cwd}\\inputs\\legislators.csv", newline="", encoding="utf-8"
+    ) as legislators:
         reader = csv.reader(legislators)
         _ = next(reader)
 
@@ -36,11 +39,14 @@ def read_legislators() -> Sequence:
 
 
 def read_sorted_votes_by_legislator() -> Sequence:
+    """Reads a csv file containing vote results and returns a list of sorted by their legislator_id"""
     sorted_votes_by_legislator_id: Sequence = []
 
-    with open(f"{cwd}\\vote_results.csv", newline="", encoding="utf-8") as vote_results:
+    with open(
+        f"{cwd}\\inputs\\vote_results.csv", newline="", encoding="utf-8"
+    ) as vote_results:
         reader = csv.reader(vote_results)
-        headers = next(reader)
+        _ = next(reader)
 
         sorted_votes_by_legislator_id.append(next(reader))
 
@@ -61,8 +67,9 @@ def read_sorted_votes_by_legislator() -> Sequence:
 
 
 def read_bills() -> Sequence:
+    """Reads a csv file containing bills and returns an unsorted list of bills"""
     bills: Sequence = []
-    with open(f"{cwd}\\bills.csv", newline="", encoding="utf-8") as csv_bills:
+    with open(f"{cwd}\\inputs\\bills.csv", newline="", encoding="utf-8") as csv_bills:
         reader = csv.reader(csv_bills)
         _ = next(reader)
         for index, element in enumerate(reader):
@@ -71,10 +78,11 @@ def read_bills() -> Sequence:
 
 
 def read_votes() -> Tuple[Sequence, dict]:
+    """Reads a csv file containing votes and returns an unsorted list of votes"""
     votes: Sequence = []
     map_bill_to_vote = {}
 
-    with open(f"{cwd}\\votes.csv", newline="", encoding="utf-8") as csv_votes:
+    with open(f"{cwd}\\inputs\\votes.csv", newline="", encoding="utf-8") as csv_votes:
         reader = csv.reader(csv_votes)
         _ = next(reader)
         for index, element in enumerate(reader):
