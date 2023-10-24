@@ -49,10 +49,13 @@ def read_sorted_votes_by_legislator() -> Sequence:
         _ = next(reader)
 
         sorted_votes_by_legislator_id.append(next(reader))
-
+        max_id = int(sorted_votes_by_legislator_id[0][0])
         for element in reader:
             i = 0
-
+            if int(element[0]) >= max_id:
+                sorted_votes_by_legislator_id.append(element)
+                max_id = int(element[0])
+                continue
             comparison = int(element[1])
 
             while (

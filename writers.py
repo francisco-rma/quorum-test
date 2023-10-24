@@ -10,7 +10,7 @@ os.chdir(cwd)
 cwd = os.getcwd()
 
 
-def write_legislator_support_ooppose_count(
+def write_legislator_support_oppose_count(
     sorted_legislators: Sequence, sorted_votes_by_legislator_id: Sequence
 ):
     """Create a csv file containing, for each legislator, their name and the number of bills supported and opposed by them"""

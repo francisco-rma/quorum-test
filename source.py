@@ -8,7 +8,7 @@ sorted_votes_by_legislator_id: Sequence = readers.read_sorted_votes_by_legislato
 bills: Sequence = readers.read_bills()
 votes, map_bill_to_vote = readers.read_votes()
 
-writers.write_legislator_support_ooppose_count(
+writers.write_legislator_support_oppose_count(
     sorted_legislators=sorted_legislators,
     sorted_votes_by_legislator_id=sorted_votes_by_legislator_id,
 )

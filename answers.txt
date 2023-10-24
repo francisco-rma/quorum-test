@@ -1,0 +1,42 @@
+1. Discuss your solution’s time complexity. What tradeoffs did you make?
+
+The most demanding aspects of the proposed solution lie within the functions responsible for
+reading legislator votes and creating the bill support table
+
+The first one iteratively reads rows from the csv file and then inserts the entries read into a list.
+However it inserts the entries in such a way as to return a list already sorted by the legislator id.
+This is analogous to an insertion sort algorithm, although in this case the list isn't being sorted in place.
+The time complexity of such an algorithm (assuming the worst case), is O(n^2), because for each entry from the file,
+the program must, potentially, iterate through the whole return list to find the adequate index for the entry.
+Having a variable store the maximum legislator id currently in the list will occasionally avoid iterating
+through the whole list, when the element to be inserted is larger than the max, but to evaluate the time complexity
+for an algorithm, the worst case should always be assumed, and so it reamins O(n^2).
+
+The second one initializes an empty dictionary and then iterates through the list of sorted votes, storing the number
+of votes for and against each bill under the key given by the vote id associated with the bill. Finally, it traverses
+the list bills and uses the sponsor id to search the legislator list for the name of the sponsor. The search is 
+implemented as a binary search, which is possible beacuse the legislator list is sorted by the legislator id, meaning 
+the time complexity of this operation is O(log(n)). Combining the two pieces of information, we reach the conclusion
+that the total time complexity for this function is O(n*log(n)).
+
+
+
+2. How would you change your solution to account for future columns that might be
+requested, such as “Bill Voted On Date” or “Co-Sponsors”?
+
+It largely depends on the data modeling chosen for these new columns. A new "Co-sponsor" column on the bills table would not dramatically affect
+the structure or complexity of the algorithm. Introducing information stored within another table, however, might incur a more resource intensive algorithm
+
+
+3. How would you change your solution if instead of receiving CSVs of data, you were given a
+list of legislators or bills that you should generate a CSV for?
+
+Conceptually, the soultion would not need drastic changes, instead of iterating through file rows, the program would
+iterate through list elements, generating a row for each one. Also, the logic of iterating through a list and writing
+file rows for each one is already implemented in the writers module.
+
+
+4. How long did you spend working on the assignment?
+
+Approximately 4 hours, on and off. Although I must admit I believe I would have spent less time if
+I'd been able to do it all in one session.
